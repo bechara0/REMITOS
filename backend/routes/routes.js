@@ -28,4 +28,15 @@ router.get("/getProveedores", async (req, res) => {
   }
 });
 
+// eliminar proveedor por id
+router.delete("/deleteProveedor/:id", async (req, res) => {
+  try {
+    const id = req.params.id.trim();
+    const data = await Model.findByIdAndDelete(id);
+    res.send(`registro de ${data.proveedor} se ha eliminado`);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = router;
