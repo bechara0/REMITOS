@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Model = require("../model/model");
+const { Proveedor, Remito } = require("../model/model");
 const { SchemaTypeOptions } = require("mongoose");
 
 // envio dato PROVeEDOR
 router.post("/post/proveedor", async (req, res) => {
-  const data = new Model({
+  const data = new Proveedor({
     proveedor: req.body.proveedor,
   });
   console.log("Datos post proveedor: ", req.body);
@@ -21,7 +21,7 @@ router.post("/post/proveedor", async (req, res) => {
 // get proveedor
 router.get("/getProveedores", async (req, res) => {
   try {
-    const data = await Model.find();
+    const data = await Proveedor.find();
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -32,10 +32,40 @@ router.get("/getProveedores", async (req, res) => {
 router.delete("/deleteProveedor/:id", async (req, res) => {
   try {
     const id = req.params.id.trim();
-    const data = await Model.findByIdAndDelete(id);
+    const data = await Proveedor.findByIdAndDelete(id);
     res.send(`registro de ${data.proveedor} se ha eliminado`);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+// post remitos
+router.post("/post/remito", async (req, res) => {
+  const data = new Remito({
+    proveedor: req.body.proveedor,
+    fecha: req.body.fecha,
+    remito: req.body.remito,
+    cantidad: req.body.cantidad,
+    unidad: req.body.unidad,
+    descripcion: req.body.descripcion,
+    facturado: req.body.facturado,
+    factura: req.body.factura,
+  });
+  try {
+    const dataToSave = await data.save();
+    res.status(200).json(dataToSave);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// get remitos
+router.get("/getRemitos", async (req, res) => {
+  try {
+    const data = await Remito.find();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 
