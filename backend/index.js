@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const mongoString = process.env.DATABASE_URL;
 const routes = require("./routes/routes");
+const cors = require("cors");
 
 mongoose.connect(mongoString);
 const database = mongoose.connection;
@@ -16,7 +17,10 @@ database.once("connected", () => {
 });
 
 const app = express();
+
 const port = process.env.PORT;
+
+app.use(cors());
 
 app.use(express.json());
 

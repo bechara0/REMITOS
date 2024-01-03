@@ -62,7 +62,15 @@ router.post("/post/remito", async (req, res) => {
 // get remitos
 router.get("/getRemitos", async (req, res) => {
   try {
-    const data = await Remito.find();
+    const { proveedor, remito } = req.query;
+    let query = {};
+    if (proveedor) {
+      query.proveedor = proveedor;
+    }
+    if (remito) {
+      query.remito = remito;
+    }
+    const data = await Remito.find(query);
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
