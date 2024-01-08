@@ -8,6 +8,19 @@ import IngresoRemito from "./templates/IngresoRemito";
 function App() {
   const [proveedores, setProveedores] = useState({});
   const [ingresarRemito, setIngresarRemito] = useState(false);
+  const [manejoDetalle, setManejoDetalle] = useState(false);
+  const [datosFormulario, setDatosFormulario] = useState({
+    proveedor: "",
+    fecha: "",
+    remito: "",
+    cantidad: [],
+    cantidadInput: "",
+    unidad: "",
+    descripcion: [],
+    descripcionInput: "",
+    facturado: false,
+    factura: "",
+  });
 
   useEffect(() => {
     const listaProveedores = async () => {
@@ -25,6 +38,10 @@ function App() {
         ingresarRemito={ingresarRemito}
         setIngresarRemito={setIngresarRemito}
         proveedores={proveedores}
+        manejoDetalle={manejoDetalle}
+        setManejoDetalle={setManejoDetalle}
+        datosFormulario={datosFormulario}
+        setDatosFormulario={setDatosFormulario}
       />
     </>
   );
