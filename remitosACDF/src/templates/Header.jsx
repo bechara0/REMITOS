@@ -11,10 +11,11 @@ const Header = ({ setIngresarRemito }) => {
       <div className="container">
         <h1>CONTROL DE REMITOS ACDF</h1>
         <ul className="list">
-          <button>Inicio</button>
-          <button onClick={ingreso}>Nuevo Ingreso</button>
-          <button>Filtros</button>
-          <button>Todos loa remitos</button>
+          <button className="btn btn-warning">Inicio</button>
+          <button onClick={ingreso} className="btn btn-warning">
+            Nuevo Ingreso
+          </button>
+          <button className="btn btn-warning">Filtros</button>
         </ul>
       </div>
     </>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { postRemitos } from "../helpers/helper";
 
 const IngresoRemito = ({
   setIngresarRemito,
@@ -8,7 +9,33 @@ const IngresoRemito = ({
   manejoDetalle,
   datosFormulario,
   setDatosFormulario,
+  booleanPostRemito,
+  setBooleanPostRemito,
 }) => {
+  useEffect(() => {
+    if (booleanPostRemito) {
+      const postearRemito = async () => {
+        const post = await postRemitos(datosFormulario);
+        if (post) {
+          setDatosFormulario({
+            proveedor: "",
+            fecha: "",
+            remito: "",
+            cantidad: [],
+            cantidadInput: "",
+            unidad: "",
+            descripcion: [],
+            descripcionInput: "",
+            facturado: false,
+            factura: "",
+          });
+          setBooleanPostRemito(false);
+        }
+      };
+      postearRemito();
+    }
+  }, [booleanPostRemito]);
+
   const encenderFormulario = (e) => {
     e.preventDefault();
     setManejoDetalle(true);
@@ -40,22 +67,19 @@ const IngresoRemito = ({
     }));
   };
 
+  const handleForm = (e) => {
+    e.preventDefault();
+    setBooleanPostRemito(true);
+  };
+
   console.log("datos a enviar: ", datosFormulario);
-
-  const sumarOtroDetalle = (e) => {
-    e.preventDefault();
-  };
-
-  const enviarFormulario = (e) => {
-    e.preventDefault();
-  };
 
   return (
     <>
       {ingresarRemito && (
         <>
           <h1>Ingreso Nuevo Remito</h1>
-          <form>
+          <form onSubmit={handleForm}>
             <label>Selecciona un Proveedor</label>
             <select
               value={datosFormulario.proveedor}
@@ -85,7 +109,10 @@ const IngresoRemito = ({
               value={datosFormulario.remito}
               onChange={handleChange}
             />
-            <button onClick={(e) => encenderFormulario(e)}>
+            <button
+              onClick={(e) => encenderFormulario(e)}
+              className="btn btn-primary"
+            >
               Agregar Insumo
             </button>
             {manejoDetalle && (
@@ -103,7 +130,9 @@ const IngresoRemito = ({
                     }
                     name="cantidad"
                   />
-                  <button onClick={handleCantidad}>Enviar cantidad</button>
+                  <button onClick={handleCantidad} className="btn btn-primary">
+                    Enviar cantidad
+                  </button>
                 </div>
                 <div>
                   <input
@@ -118,7 +147,12 @@ const IngresoRemito = ({
                     }
                   />
 
-                  <button onClick={handleDescripcion}>Enviar detalle</button>
+                  <button
+                    onClick={handleDescripcion}
+                    className="btn btn-primary"
+                  >
+                    Enviar detalle
+                  </button>
                 </div>
               </div>
             )}
@@ -129,7 +163,7 @@ const IngresoRemito = ({
               onChange={handleChange}
               name="factura"
             />
-            <input type="submit" onClick={(e) => enviarFormulario(e)} />
+            <button>Enviar Formulario</button>
           </form>
         </>
       )}

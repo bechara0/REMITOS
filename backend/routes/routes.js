@@ -62,13 +62,16 @@ router.post("/post/remito", async (req, res) => {
 // get remitos
 router.get("/getRemitos", async (req, res) => {
   try {
-    const { proveedor, remito } = req.query;
+    const { proveedor, remito, _id } = req.query;
     let query = {};
     if (proveedor) {
       query.proveedor = proveedor;
     }
     if (remito) {
       query.remito = remito;
+    }
+    if (_id) {
+      query._id = _id;
     }
     const data = await Remito.find(query);
     res.json(data);
