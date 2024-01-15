@@ -72,8 +72,6 @@ const IngresoRemito = ({
     setBooleanPostRemito(true);
   };
 
-  console.log("datos a enviar: ", datosFormulario);
-
   return (
     <>
       {ingresarRemito && (

@@ -30,7 +30,7 @@ export const remitoPorId = async (_id) => {
     const url = `http://127.0.0.1:3000/api/getRemitos?_id=${_id}`;
     const remito = await fetch(url);
     const resultado = await remito.json();
-    return resultado;
+    return resultado[0];
   } catch (error) {
     console.error(error);
   }

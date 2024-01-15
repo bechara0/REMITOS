@@ -14,7 +14,7 @@ const Tabla = ({
   };
   return (
     <div>
-      <table className="table table-bordered border-primary">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Proveedor</th>

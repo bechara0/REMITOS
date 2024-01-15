@@ -54,6 +54,7 @@ function App() {
     if (expandirRemito) {
       const traerRemito = async () => {
         const remitoId = await remitoPorId(idRemito);
+
         setRemitoIndividual(remitoId);
       };
       traerRemito();
@@ -83,9 +84,8 @@ function App() {
       <Remito
         expandirRemito={expandirRemito}
         setExpandirRemito={setExpandirRemito}
-        idRemito={idRemito}
-        setRemitoIndividual={setRemitoIndividual}
         remitoIndividual={remitoIndividual}
+        
       />
     </>
   );
