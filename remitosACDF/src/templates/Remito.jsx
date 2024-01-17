@@ -1,3 +1,5 @@
+import { borrarRemito } from "../helpers/helper";
+
 const Remito = ({ expandirRemito, remitoIndividual, setExpandirRemito }) => {
   const {
     proveedor,

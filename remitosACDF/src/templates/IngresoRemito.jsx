@@ -33,6 +33,7 @@ const IngresoRemito = ({
         }
       };
       postearRemito();
+      location.reload();
     }
   }, [booleanPostRemito]);
 

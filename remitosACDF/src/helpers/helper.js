@@ -58,3 +58,19 @@ export const postRemitos = async (datosRemito) => {
     alert("Error en envío de datos del Remito a base de datos");
   }
 };
+
+// borrar remito
+
+export const borrarRemito = async (_id) => {
+  try {
+    const url = `http://127.0.0.1:3000/api/deleteRemito/${_id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

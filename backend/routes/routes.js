@@ -39,6 +39,17 @@ router.delete("/deleteProveedor/:id", async (req, res) => {
   }
 });
 
+// borrar remito
+router.delete("/deleteRemito/:id", async (req, res) => {
+  try {
+    const id = req.params.id.trim();
+    const data = await Remito.findByIdAndDelete(id);
+    res.send(`remito ${data.remito} se ha eliminado`);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 // post remitos
 router.post("/post/remito", async (req, res) => {
   const data = new Remito({
